@@ -1,0 +1,11 @@
+Git commands to create repository on command line
+echo "# gittest" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/RonMei/gittest.git
+git push -u origin master
+
+push an existing repository from the command line
+git remote add origin https://github.com/RonMei/gittest.git
+git push -u origin master
