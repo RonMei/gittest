@@ -1,0 +1,7 @@
+git log # show all commits
+git log -n 1 # show the last commit 
+git log -n 2 # show the last two commits
+git log --since=2017-01-07 # shows commit from this date
+git log --until=2017-01-07 # shows commit until this date
+git log --author="RonMei" # shows commits from "RonMei"
+git log --grep="command" # shows commits that have "command" in description
