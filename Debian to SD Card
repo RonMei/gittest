@@ -1,0 +1,13 @@
+- Download Debian
+
+Debian 8.6 at https://www.debian.org/
+
+- Write Debian to SD Card
+
+sudo dd if=debian-8.6.0-amd64-i386-netinst.iso of=/dev/sdb
+password & wait
+
+sync & wait
+
+Remove sd card from laptop
+# put sd card into beaglebone
