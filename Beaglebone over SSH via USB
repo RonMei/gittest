@@ -1,0 +1,11 @@
+- Connect BeagleBone to Laptop
+- Type sudo ssh root@192.168.7.2
+- Enter password
+
+Check for static IP or DHCP services
+- type ifconfig
+- type cat /etc/network/interfaces
+
+If necessary then change "inet addr" and "Mask" (was not necessary for me)
+- type nano interfaces
+- make change, save and exit nano
