@@ -1,0 +1,44 @@
+Download Debian for Virtualbox
+- https://www.debian.org/distrib/netinst > Small CDs or USB sticks > amd64
+
+Settings Virtual Machine
+- right click machine
+- Settings > Advanced
+- Shared Clipboard > Bidirectional / Drag'n'Drop > Bidirectional
+- System > Motherboard > Boot Order > Optical & Hard Disk
+- Storage > Controller: IDE > Empty > Optical Drive: IDE Secondary Master > click CD.DVD Symbol > Choose Virtual Optical Disk File > Select Downloaded File: debian-8.6.0-amd64-netinst.iso > Open
+- Network > Adapter 1 > Enable Network Adapter > Bridged Adapter
+- Ok
+
+Start Machine & Install Debian
+- Graphical install
+- Language: English
+- Origin: other > Netherlands
+- Keyboard: American English
+- debian8
+- Domain Name: 4everCollect.com
+- Root password
+- myname
+- myname
+- User password
+- Time Zone
+- Guided - use entire disk
+- All files in one partition
+- Finish partitioning and write changes to disk
+- Write the changes to disk: yes
+- Mirror Country: Closest Country
+- Debian archive mirror: Try picking the best
+- HTTP proxy information: Leave blank
+- Participate in survey: no
+- Software to install: print server & SSH server & standard system utilities
+- Install Grub boot loader: yes
+- Device for boot loader installation: /dev/sda
+- Installation Complete
+
+Log in
+
+- Wait for terminal
+- type: su -
+- type: password
+- type: apt-get install build-essential module-assistant linux-headers-$(uname -r)
+- type: Y
