@@ -1,0 +1,95 @@
+x What is SSH?
+
+SSH, which stands for Secure SHell, is a way (protocol) to insure a secure connection between two computers. 
+Secure means that all communication between those computers is encrypted, and this includes the process of 
+logging in. 
+
+x How to set up an SSH connection?
+
+First we need to generate an SSH key. An SSH key is a means for a computer to identify itself to an SSH server. 
+
+This is what I did upon installing debian in my virtual machine (see my commit: Debian for Virtualbox)
+
+- go to the terminal of your virtual machine which already has debian installed
+- type: ssh-keygen -t rsa
+This generates the key. "-t" stands for type, and "rsa" stands for the encryption method
+- Enter file in which to save the key (/root/.ssh/id_rsa): Leave blank and press enter
+- Enter passphrase (empty for no passphrase): Leave blank and press enter
+- Enter again: Leave blank and press enter
+- Your identification has been saved in /root/.ssh/id_rsa.
+- Your public key has been saved in /root/.ssh/id_rsa.pub.
+- Then write down where your public key has been saved: /root/.ssh/id_rsa.pub
+
+The file which has been created is a ".pub file". This file is or contains the certificate that is gonna 
+enable us to login to another computer without having to use a password.
+
+After completing this step I went to the terminal on my linux computer. 
+My first step was checking whether or not I could ping my virtual machine:
+
+- type: ping <ipaddress of virtual machine>
+
+This was a succes, so now I tried to get into the virtual machine with an ssh connection
+
+- type: ssh <virtual machine user name>@<ipaddress of virtual machine>
+
+This was also a succes. Now i was logged into my virtual machine with my own computer.
+
+I logged back into my own computer again.
+
+- type: ctrl-d
+
+X How can we use ansible?
+
+First we need to make a directory where our host(s) (in my case the virtual machine) is/are defined.
+
+- type: sudo mkdir /etc/ansible
+
+Now we need to make a file in this directory with the ip adress(es) of the host(s)
+
+- type: sudo nano /etc/ansible/hosts
+
+All we need to do here is write down the ip adress(es)
+
+- type: <ipaddress of virtual machine>
+- ctrl-x
+- Yes
+- ctrl-x
+
+I thought I had all steps completed so I tried to ping my virtual machine with ansible
+
+- type: ansible all -m ping -u <virtual machine user name>
+or
+- type: ansible all -m ping
+
+To my amazement my virtual machine was still unreachable. So i had to generate the SSH key here as well.
+
+- type: ssh-keygen -t rsa
+This generates the key. "-t" stands for type, and "rsa" stands for the encryption method
+- Enter file in which to save the key (/root/.ssh/id_rsa): Leave blank and press enter
+- Enter passphrase (empty for no passphrase): Leave blank and press enter
+- Enter again: Leave blank and press enter
+- Your identification has been saved in /root/.ssh/id_rsa.
+- Your public key has been saved in /root/.ssh/id_rsa.pub.
+- Then write down where your public key has been saved: /root/.ssh/id_rsa.pub
+
+Now the key needs to be copied into the appropriate directory
+
+- type (in one line): cat ~/.ssh/id_rsa.pub | ssh ron@192.168.178.16 'umask 0077; mkdir -p .ssh;
+ cat >> .ssh/authorized_keys && echo "Key copied"'
+or
+- type: ssh-copy-id -i ~/.ssh/id_rsa.pub user@vm
+
+Again I tried to SSH into my virtual machine again
+
+- type: ssh <virtual machine user name>@<ipaddress of virtual machine>
+
+This worked so i logged back into my laptop
+
+- ctrl-d
+
+Since everything should work now I tried to ping my virtual machine / remote host with anisible once again
+
+- type: ansible all -m ping
+
+I received my very first PING PONG, so ansible was and is ready to dive into!
+
