@@ -1,0 +1,23 @@
+In order to be able to manage our virtual machine through ansible ad hoc commands and playbooks,
+we need to give sudo rights to our virtual machine.
+
+From the terminal of our own computer (the local machine) we need to log into the virtual machine
+(the remote machine).
+- type: ssh <virtual machine user name>@<ipaddress of virtual machine>
+
+Now we need to become root on our remote machine.
+- type: su -
+
+Now we need to install sudo.
+- type: apt-get install sudo
+
+Now we need to define which user will be given the sudo rights.
+- type: adduser <username> sudo
+
+To effect these changes we need to log out from the remote machine and log back in.
+After logging back in we want to test whether or not we have been given the sudo rights.
+- type: sudo apt-get update
+
+If the update runs, and it will, we know that we will be able to run playbooks from our local
+machine to manage our remote machine.
+
